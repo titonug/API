@@ -10,16 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {   
-        $validator = Validator::make($request->all(),[
+    {
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
             'password' => 'required'
         ]);
-        
-        if($validator->fails())
-        {
-            return response()->json(['status_code' => 400, 'message' => 'Bad RequestAAA']);
+
+        if ($validator->fails()) {
+            return response()->json(['status_code' => 400, 'message' => 'Bad Request']);
         }
 
         $user = new User();
@@ -36,20 +35,18 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(['status_code' => 400, 'message' => 'Bad Request']);
         }
 
         $credentials = request(['email', 'password']);
 
-        if(!Auth::attempt($credentials))
-        {
+        if (!Auth::attempt($credentials)) {
             return response()->json([
                 'status_code' => 500,
                 'message' => 'Unauthorized!'
