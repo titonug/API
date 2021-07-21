@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,30 @@ Route::group(['middleware' => ['auth:sanctum']], function()
     Route::delete('/posts/{id}', [PostController::class, 'destroy'] );
     Route::post('/gambar', [FileController::class, 'create'] );
     Route::post('/logout', [AuthController::class, 'logout']);
-}); 
+});
+
+Route::get('/ps', [PController::class, 'posts']);
+Route::get('/p/{p_id}', [PController::class, 'getPostsById']);
+Route::post('/p', [PController::class, 'store']);
+Route::put('/p/{p_id}', [PController::class, 'update']);
+Route::delete('/p/{p_id}', [PController::class, 'delete']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Route::get('/p/{p_id}/comments', [PController::class, 'getPostWithComments']);
+
 
