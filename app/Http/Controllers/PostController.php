@@ -44,8 +44,8 @@ class PostController extends Controller
     {
         try {
             $post = new Post();
-            $post->title = $request->title;
-            $post->body = $request->body;
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
             if ($post->save()) {
                 return new PostResource($post);
             }
